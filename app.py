@@ -14,8 +14,43 @@ st.set_page_config(
     page_title="Investment Simulation Calculator",
     page_icon="📈",
     layout="wide",
-    initial_sidebar_state="collapsed"
+    initial_sidebar_state="collapsed",
+    menu_items={
+        'Get Help': None,
+        'Report a bug': None,
+        'About': None
+    }
 )
+
+# Set theme to light mode
+st.markdown("""
+    <style>
+        [data-testid="stSidebar"][aria-expanded="true"]{
+            background-color: #f8f9fa;
+        }
+        [data-testid="stSidebar"][aria-expanded="false"]{
+            background-color: #f8f9fa;
+        }
+        div[data-testid="stToolbar"] {
+            visibility: hidden;
+        }
+        div[data-testid="stDecoration"] {
+            visibility: hidden;
+        }
+        div[data-testid="stStatusWidget"] {
+            visibility: hidden;
+        }
+        #MainMenu {
+            visibility: hidden;
+        }
+        header {
+            visibility: hidden;
+        }
+        footer {
+            visibility: hidden;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
 # Custom CSS for premium look and mobile responsiveness
 st.markdown("""
@@ -23,16 +58,53 @@ st.markdown("""
     /* Main container */
     .main {
         padding: 0 0 0 0; /* Removed top padding to reduce whitespace */
-        background-color: #ffffff;
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     }
-    
-    /* Headings */
+
+    /* Dark mode specific styles */
+    [data-theme="dark"] {
+        background-color: #262730;
+    }
+
+    [data-theme="dark"] .stRadio > label {
+        color: #ffffff !important;
+    }
+
+    [data-theme="dark"] .stNumberInput > label {
+        color: #ffffff !important;
+    }
+
+    [data-theme="dark"] .stSelectSlider > label {
+        color: #ffffff !important;
+    }
+
+    [data-theme="dark"] .stMetric {
+        background-color: #1e1e1e;
+        border: 1px solid #404040;
+    }
+
+    [data-theme="dark"] .stMetric [data-testid="stMetricValue"] {
+        color: #ffffff;
+    }
+
+    [data-theme="dark"] .stMetric [data-testid="stMetricLabel"] {
+        color: #cccccc;
+    }
+
+    [data-theme="dark"] .stButton>button {
+        background-color: #0066cc;
+        color: white;
+    }
+
+    [data-theme="dark"] .stButton>button:hover {
+        background-color: #0055aa;
+    }
+
+    /* Headings - both light and dark mode */
     h1 {
         font-size: 2rem;
         font-weight: 700;
         margin-bottom: 1.5rem;
-        color: #333333;
     }
     
     @media (max-width: 768px) {
@@ -46,13 +118,31 @@ st.markdown("""
         font-size: 1.5rem;
         font-weight: 600;
         margin-bottom: 1.2rem;
-        color: #333333;
     }
     
     @media (max-width: 768px) {
         h2 {
             font-size: 1.2rem;
             margin-bottom: 0.8rem;
+        }
+
+        /* Improve mobile dark mode readability */
+        [data-theme="dark"] .stRadio > div {
+            background-color: #1e1e1e;
+            border-radius: 4px;
+            padding: 0.5rem;
+        }
+
+        [data-theme="dark"] .stNumberInput > div > div > input {
+            background-color: #1e1e1e;
+            color: #ffffff;
+            border: 1px solid #404040;
+        }
+
+        [data-theme="dark"] .stSelectSlider > div {
+            background-color: #1e1e1e;
+            border-radius: 4px;
+            padding: 0.5rem;
         }
     }
     
