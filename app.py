@@ -387,39 +387,31 @@ with left_col:
         format="%d"
     )
     
-    # Contribution frequency and investment term in separate rows
-    # Use a custom container to style the selectbox
-    st.markdown("""
-        <style>
-        /* Custom styling for the Contribution Frequency selectbox */
-        div[data-testid="stSelectbox"] {
-            margin-bottom: 1rem;
-        }
-        </style>
-    """, unsafe_allow_html=True)
-    
-    contribution_frequency = st.selectbox(
+    # Replace selectbox with radio buttons for contribution frequency
+    contribution_frequency = st.radio(
         "Contribution Frequency",
-        ['Bi-Weekly', 'Monthly', 'Quarterly', 'Annually']
+        ['Bi-Weekly', 'Monthly', 'Quarterly', 'Annually'],
+        horizontal=True
     )
     
-    investment_term = st.number_input(
+    # Use select slider for investment term
+    investment_term = st.select_slider(
         "Investment Term (Years)",
-        min_value=1,
-        value=10,
-        step=1
+        options=list(range(1, 51)),
+        value=10
     )
     
-    # Stock selection and return rate
-    selected_stock = st.selectbox(
+    # Stock selection with radio buttons for better mobile experience
+    selected_stock = st.radio(
         "Select Investment Strategy",
         list(TOP_STOCKS.keys())
     )
     
-    # Analysis period selector - moved up to be used for both historical data and calculations
-    period = st.selectbox(
+    # Analysis period selector with radio buttons
+    period = st.radio(
         "Historical Analysis Period To Use Future Simulation",
-        ['1y', '3y', '5y', '10y', 'max']
+        ['1y', '3y', '5y', '10y', 'max'],
+        horizontal=True
     )
     
     # Get stock data and calculate historical return rate
@@ -454,9 +446,10 @@ with left_col:
             step=0.5
         )
     
-    compounding_frequency = st.selectbox(
+    compounding_frequency = st.radio(
         "Compounding Frequency",
-        ['Daily', 'Monthly', 'Quarterly', 'Semi-Annually', 'Annually']
+        ['Daily', 'Monthly', 'Quarterly', 'Semi-Annually', 'Annually'],
+        horizontal=True
     )
     
     if st.button("Calculate", key="calc_button"):
