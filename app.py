@@ -499,7 +499,7 @@ with left_col:
     
     # Analysis period selector with radio buttons
     period = st.radio(
-        "Historical Analysis Period To Use Future Simulation",
+        "Historical Analysis Period To Use For Future Simulation",
         ['1y', '3y', '5y', '10y', 'max'],
         horizontal=True
     )
